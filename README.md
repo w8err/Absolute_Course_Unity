@@ -21,27 +21,33 @@ Q&A는 [www.Unity3dStudy.com](https://unity3dstudy.com/2021/06/09/UnityBook-2021
 [최종 프로젝트 리포지토리](https://github.com/IndieGameMaker/SpaceShooter2021)
 
 프로젝트에 사용된 버전 : 유니티 2021.1.7f1
+현재 프로젝트 버전 : 유니티 2021.3.6f1
 
-- [2장 - 게임 개발 준비](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/2장)
-- [3장 - 게임 스테이지 제작](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/3장)
-- [4장 - 주인공 캐릭터 제작](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/4장)
-- [5장 - 총 발사 로직](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/5장)
-- [6장 - 적 캐릭터 제작](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/6장)
-- [7장 - 유니티 UI 시스템](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/7장)
-- [8장 - 게임 매니저](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/8장)
-- [9장 - 레이캐스트 활용](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/9장)
-- [10장 - 내비게이션 고급 기법](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/10장)
-- [11장 - 라이트매핑 및 라이트 프로브](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/11장)
-- [12장 - 씬 관리](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/12장)
+================================================================================================================================================================================================================
 
-### Warrior 프로젝트
-- New Input System 프로젝트입니다.
-- [완결된 프로젝트](https://github.com/IndieGameMaker/Warrior)
 
-### AngryBot2Net 프로젝트
-- 포톤 네트워크를 활용한 슈팅 게임 프로젝트입니다.
-- [완결된 프로젝트](https://github.com/IndieGameMaker/AngryBot2Net)
+### ✅구현 완료,  ❌구현 안됨,  🚩진행중  
 
-### 오탈자 확인
 
-- [오탈자 확인](https://github.com/IndieGameMaker/UnityBook/issues/1)
+### SpaceShooter 프로젝트 진행률
+
+- ✅ [2장 - 게임 개발 준비](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/2장) 
+- ✅ [3장 - 게임 스테이지 제작](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/3장) 
+- ✅ [4장 - 주인공 캐릭터 제작](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/4장) 
+- ✅ [5장 - 총 발사 로직](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/5장) 
+- ✅ [6장 - 적 캐릭터 제작](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/6장)
+- ✅ [7장 - 유니티 UI 시스템](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/7장)
+- ✅ [8장 - 게임 매니저](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/8장)
+- ✅ [9장 - 레이캐스트 활용](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/9장)
+- ✅ [10장 - 내비게이션 고급 기법](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/10장)
+- ❌ [11장 - 라이트매핑 및 라이트 프로브](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/11장)
+- 🚩 [12장 - 씬 관리](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/12장) 진행중
+- ❌ [13장 - 오클루전 컬링] 
+
+#### Warrior 프로젝트 진행률
+
+- 🚩 [14장 - Input System](https://github.com/IndieGameMaker/Warrior)
+
+##### AngryBot2Net 프로젝트
+
+- 🚩 [15장 - 포톤 클라우드 활용](https://github.com/IndieGameMaker/AngryBot2Net)
