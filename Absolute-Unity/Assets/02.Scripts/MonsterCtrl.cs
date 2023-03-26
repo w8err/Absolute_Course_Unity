@@ -37,11 +37,33 @@ public class MonsterCtrl : MonoBehaviour
     private readonly int hashHit = Animator.StringToHash("Hit");
     private readonly int hashPlayerDie = Animator.StringToHash("PlayerDie");
     private readonly int hashSpeed = Animator.StringToHash("Speed");
-    
+    private readonly int hashDie = Animator.StringToHash("Die");
+
     // 혈흔 효과 프리팹 변수 선언
     private GameObject bloodEffect;
 
-    void Start() {
+    private int hp = 100;
+
+  // 스크립트가 활성화될 때마다 호출되는 함수
+    void OnEnable()
+    {
+    // 이벤트 발생 시 수행할 함수 연결
+    PlayerCtrl.OnPlayerDie += this.OnPlayerDie;
+
+    // 몬스터의 상태를 체크하는 코루틴 함수 호출
+    StartCoroutine(CheckMonsterState());
+
+    // 몬스터의 상태에 따라 액션을 취하게 해주는 함수 호출
+    StartCoroutine(MonsterAction());
+    }
+
+    void OnDisable()
+    {
+    // 기존에 연결된 함수 해제
+    PlayerCtrl.OnPlayerDie -= this.OnPlayerDie;
+    }
+
+    void Awake() {
 
         // 몬스터의 Transform 할당
         monsterTr = GetComponent<Transform>();
@@ -51,6 +73,8 @@ public class MonsterCtrl : MonoBehaviour
 
         // NavMeshAgent 컴포넌트 할당
         agent = GetComponent<NavMeshAgent>();
+        // NavMeshAgent의 자동 회전 기능 비활성화
+        agent.updateRotation = false;
 
         // 애니메이터 컴포넌트 할당
         anim = GetComponent<Animator>();
@@ -61,12 +85,20 @@ public class MonsterCtrl : MonoBehaviour
         
         // 추적 대상의 위치를 설정하면 바로 추적 시작
         // agent.destination = playerTr.position;
+    }
 
-        // 몬스터의 상태를 체크하는 코루틴 함수 호출
-        StartCoroutine(CheckMonsterState());
-
-        // 몬스터의 상태에 따라 액션을 취하게 해주는 함수 호출
-        StartCoroutine(MonsterAction());
+    void Update() 
+    {
+        // 목적지까지 남은 거리로 회전 여부 판단
+        if (agent.remainingDistance >= 2.0f)
+        {
+            // 에이전트의 이동 방향
+            Vector3 direction = agent.desiredVelocity;
+            // 회전 각도(쿼터니언) 산출
+            Quaternion rot = Quaternion.LookRotation(direction);
+            // 구면 선형보간 함수로 부드러운 회전 처리
+            monsterTr.rotation = Quaternion.Slerp(monsterTr.rotation, rot, Time.deltaTime * 10.0f);
+        }
     }
 
     // 코루틴 함수. 몬스터의 상태를 0.3초씩 체크함.
@@ -75,6 +107,9 @@ public class MonsterCtrl : MonoBehaviour
         while(!isDie) {
             // 0.3초 동안 중지(대기)하는 동안 제어권을 메시지 루프에 양보
             yield return new WaitForSeconds(0.3f);
+
+            // 몬스터의 상태가 Die일 때 코루틴을 종료
+            if (state == State.DIE) yield break;
 
             // 몬스터와 주인공 캐릭터 사이의 거리 측정
             float distance = Vector3.Distance(playerTr.position, monsterTr.position);
@@ -132,6 +167,26 @@ public class MonsterCtrl : MonoBehaviour
                 break;
 
                 case State.DIE:
+                isDie = true;
+                // 추적 정지
+                agent.isStopped = true;
+                // 사망 애니메이션 실행
+                anim.SetTrigger(hashDie);
+                // 몬스터의 Collider 컴포넌트 비활성화
+                GetComponent<CapsuleCollider>().enabled = false;
+
+                // 일정 시간 대기 후 오브젝트 풀링으로 환원
+                yield return new WaitForSeconds(3.0f);
+
+                // 사망 후 다시 사용할 때를 위해 hp 값 초기화
+                hp = 100;
+                isDie = false;
+
+                // Collider 컴포넌트 활성화
+                GetComponent<CapsuleCollider>().enabled = true;
+                // 몬스터를 비활성화
+                this.gameObject.SetActive(false);
+
                 break;
             }
             yield return new WaitForSeconds(0.3f);
@@ -145,17 +200,26 @@ public class MonsterCtrl : MonoBehaviour
         {
             // 충돌한 총알 삭제
             Destroy(coll.gameObject);
-            // 피격 리액션 애니메이션 실행
-            anim.SetTrigger(hashHit);
-            
-            // 총알의 충돌 지점
-            Vector3 pos = coll.GetContact(0).point;
-            // 총알의 충돌 지점의 법선 벡터(90도 계산)
-            Quaternion rot = Quaternion.LookRotation(-coll.GetContact(0).normal);
-            // 혈흔 효과를 생성하는 함수 호출
-            ShowBloodEffect(pos, rot);
         }
     }
+        public void OnDamage(Vector3 pos, Vector3 normal)
+        { 
+            // 피격 리액션 애니메이션 실행
+            anim.SetTrigger(hashHit);
+            // 총알의 충돌 지점의 법선 벡터(90도 계산)
+            Quaternion rot = Quaternion.LookRotation(normal);
+            // 혈흔 효과를 생성하는 함수 호출
+            ShowBloodEffect(pos, rot);
+
+            // 몬스터의 hp 차감
+            hp -= 30;
+            if (hp <= 0)
+            {
+                state = State.DIE;
+            // 몬스터가 사망했을 때 50점을 추가
+            GameManager.instance.DisplayScore(50);
+            }
+        }
 
     // 피튀기게 하는 함수
     void ShowBloodEffect(Vector3 pos, Quaternion rot) 
@@ -177,19 +241,6 @@ public class MonsterCtrl : MonoBehaviour
         anim.SetTrigger(hashPlayerDie);
     }
 
-    // 스크립트가 활성화될 때마다 호출되는 함수
-    void OnEnable()
-    {
-        // 이벤트 발생 시 수행할 함수 연결
-        PlayerCtrl.OnPlayerDie += this.OnPlayerDie;
-    }
-
-    void OnDisable()
-    {
-        // 기존에 연결된 함수 해제
-        PlayerCtrl.OnPlayerDie -= this.OnPlayerDie;
-    }
-
     // 기즈모를 그려줌. 궤적 확인용
     void OnDrawGizmos()
     {
@@ -207,5 +258,3 @@ public class MonsterCtrl : MonoBehaviour
         }
     }
 }
-
-
