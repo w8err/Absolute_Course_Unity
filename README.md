@@ -1,6 +1,8 @@
 
 # 절대강좌! 유니티 - 2021
 
+
+
 ## 리소스 파일
 
 책에서 사용할 리소스는 아래 링크 주소(원드라이브)에서 다운로드 받아서 사용해주세요.
@@ -24,12 +26,10 @@ Q&A는 [www.Unity3dStudy.com](https://unity3dstudy.com/2021/06/09/UnityBook-2021
 
 현재 프로젝트 버전 : 유니티 2021.3.6f1
 
-***
-
 ### ✅구현 완료,  ❌구현 안됨,  🚩진행중  
 
 
-### SpaceShooter 프로젝트 진행률
+## SpaceShooter 프로젝트 진행률
 
 - ✅ [2장 - 게임 개발 준비](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/2장) 
 - ✅ [3장 - 게임 스테이지 제작](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/3장) 
@@ -44,11 +44,11 @@ Q&A는 [www.Unity3dStudy.com](https://unity3dstudy.com/2021/06/09/UnityBook-2021
 - 🚩 [12장 - 씬 관리](https://github.com/IndieGameMaker/SpaceShooter2021/releases/tag/12장) 진행중
 - ❌ [13장 - 오클루전 컬링] 
 
-### Warrior 프로젝트 진행률
+## Warrior 프로젝트 진행률
 
 - 🚩 [14장 - Input System](https://github.com/IndieGameMaker/Warrior)
 
-### AngryBot2Net 프로젝트
+## AngryBot2Net 프로젝트
 
 - 🚩 [15장 - 포톤 클라우드 활용](https://github.com/IndieGameMaker/AngryBot2Net)
 
