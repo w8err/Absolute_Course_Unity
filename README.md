@@ -16,8 +16,6 @@ Q&A는 [www.Unity3dStudy.com](https://unity3dstudy.com/2021/06/09/UnityBook-2021
 
 ## 프로젝트 소스코드
 
-***
-
 ### SpaceShooter 프로젝트 장별 완성 프로젝트
 
 [최종 프로젝트 리포지토리](https://github.com/IndieGameMaker/SpaceShooter2021)
